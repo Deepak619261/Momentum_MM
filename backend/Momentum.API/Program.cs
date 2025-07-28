@@ -1,24 +1,82 @@
 using Microsoft.EntityFrameworkCore;
 using Momentum.API.Data;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Swashbuckle.AspNetCore.SwaggerGen;
+using Momentum.API.Services;
 using Microsoft.OpenApi.Models;
-
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+// Register TokenService
+builder.Services.AddScoped<TokenService>();
 
-// Add DbContext (replace with your actual connection string later)
+// JWT Authentication Setup
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]!))
+        };
+    });
+
+// Swagger with JWT support
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Momentum API", Version = "v1" });
+
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.Http,
+        Description = "Enter JWT Bearer token",
+        Reference = new OpenApiReference
+        {
+            Id = "Bearer",
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    options.AddSecurityDefinition("Bearer", jwtSecurityScheme);
+    options.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+});
+
+// EF Core with PostgreSQL
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-var app = builder.Build();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowLocalhost4200", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200") // Angular dev server
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // if you're using cookies or auth headers
+    });
+});
 
-// Configure middleware
+// Other services
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+
+var app = builder.Build();
+app.UseCors("AllowLocalhost4200");
+
+// Middleware
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -27,6 +85,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication(); 
 app.UseAuthorization();
 
 app.MapControllers();

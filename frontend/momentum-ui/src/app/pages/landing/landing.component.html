@@ -1,0 +1,35 @@
+<div class="landing-page momentum-theme">
+  <header class="header">
+    <div class="logo">Momentum</div>
+    <nav class="nav">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#">Features</a>
+      <a (click)="openAuth()">Get Started</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Fuel Your Goals with <span>Momentum</span></h1>
+      <p>The productivity platform built to push you forward—faster, smarter, cleaner.</p>
+      <button class="btn-get-started" (click)="openAuth()">Get Started</button>
+    </div>
+  </section>
+
+  <!-- Optional: Add feature cards here -->
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div>&copy; 2025 Momentum</div>
+      <div>
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Auth Modal -->
+  <!-- <app-auth-modal *ngIf="authVisible" (close)="authVisible = false" /> -->
+</div>
