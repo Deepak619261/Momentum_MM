@@ -12,7 +12,10 @@
   <section class="hero">
     <div class="hero-content">
       <h1>Fuel Your Goals with <span>Momentum</span></h1>
-      <p>The productivity platform built to push you forward—faster, smarter, cleaner.</p>
+      <p>
+        The productivity platform built to push you forward—faster, smarter,
+        cleaner.
+      </p>
       <button class="btn-get-started" (click)="openAuth()">Get Started</button>
     </div>
   </section>
@@ -31,5 +34,8 @@
   </footer>
 
   <!-- Auth Modal -->
-  <!-- <app-auth-modal *ngIf="authVisible" (close)="authVisible = false" /> -->
+  <app-auth-modal
+    *ngIf="authVisible"
+    (close)="authVisible = false"
+  ></app-auth-modal>
 </div>

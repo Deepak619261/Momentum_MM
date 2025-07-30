@@ -1,0 +1,58 @@
+@import "../../Styles/styles.scss";
+@import "../../Styles/theme.scss";
+
+
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: rgba(30, 30, 30, 0.85);
+  padding: 2rem;
+  border-radius: $border-radius;
+  max-width: 500px;
+  width: 100%;
+  box-shadow: $box-shadow;
+  position: relative;
+  backdrop-filter: blur(16px) saturate(120%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: $primary-color;
+  cursor: pointer;
+  transition: color 0.2s;
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+.toggle-text {
+  margin-top: 1rem;
+  text-align: center;
+  color: $accent-color;
+  span {
+    cursor: pointer;
+    text-decoration: underline;
+    color: $primary-color;
+    &:hover {
+      color: $accent-color;
+    }
+  }
+}
