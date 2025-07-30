@@ -1,0 +1,33 @@
+<div class="min-h-screen w-full relative overflow-hidden">
+  <!-- Background with gradient -->
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
+
+  <!-- Decorative blur elements -->
+  <div class="absolute top-20 left-20 w-72 h-72 rounded-full bg-white/5 blur-3xl"></div>
+  <div class="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-gray-400/10 blur-3xl"></div>
+  <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-gray-500/5 blur-3xl"></div>
+
+  <!-- Navigation -->
+  <nav class="relative z-10 flex items-center justify-between px-6 py-4">
+    <h1 class="text-white font-bold text-xl">Momentum</h1>
+    <button (click)="handleLogin()" class="text-white hover:text-gray-300">Login</button>
+  </nav>
+
+  <!-- Hero section -->
+  <main class="relative z-10 flex flex-col items-center justify-center text-center text-white px-4 py-24">
+    <h2 class="text-4xl md:text-6xl font-bold mb-4">Boost Your Coding Momentum</h2>
+    <p class="text-lg md:text-xl max-w-2xl mb-8">Practice, compete, and collaborate in real-time.</p>
+
+    <div class="flex flex-wrap gap-4 justify-center">
+      <button (click)="handleGetStarted('single')" class="bg-white text-black px-6 py-3 rounded-xl shadow hover:bg-gray-200">
+        Single Mode
+      </button>
+      <button (click)="handleGetStarted('pair')" class="bg-white text-black px-6 py-3 rounded-xl shadow hover:bg-gray-200">
+        Pair Mode
+      </button>
+      <button (click)="handleGetStarted('group')" class="bg-white text-black px-6 py-3 rounded-xl shadow hover:bg-gray-200">
+        Group Mode
+      </button>
+    </div>
+  </main>
+</div>
