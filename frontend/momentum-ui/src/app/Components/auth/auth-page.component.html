@@ -1,0 +1,343 @@
+<div
+  class="min-h-screen w-full flex items-center justify-center p-4 relative overflow-hidden"
+>
+  <!-- Background with gradient -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"
+  ></div>
+
+  <!-- Background decorative elements -->
+  <div
+    class="absolute top-20 left-20 w-72 h-72 rounded-full bg-white/5 blur-3xl"
+  ></div>
+  <div
+    class="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-gray-400/10 blur-3xl"
+  ></div>
+  <div
+    class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gray-500/5 blur-3xl"
+  ></div>
+
+  <!-- Main card -->
+  <div class="relative w-full max-w-md">
+    <div
+      class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl p-8 shadow-2xl outline-none"
+    >
+      <!-- Close button -->
+      <button
+        (click)="handleClose()"
+        class="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+        aria-label="Close authentication modal"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M6 18L18 6M6 6l12 12"
+          ></path>
+        </svg>
+      </button>
+
+      <div class="text-center mb-8">
+        <h1 class="text-white mb-2">Welcome to Momentum</h1>
+        <p class="text-gray-400">Join our community today</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div
+        class="grid w-full grid-cols-2 mb-6 bg-black/20 border border-white/10 rounded-lg"
+      >
+        <button
+          (click)="setActiveTab('login')"
+          [class.active-tab]="activeTab === 'login'"
+          [class.inactive-tab]="activeTab !== 'login'"
+          class="py-3 text-center rounded-lg transition-colors"
+        >
+          Login
+        </button>
+        <button
+          (click)="setActiveTab('signup')"
+          [class.active-tab]="activeTab === 'signup'"
+          [class.inactive-tab]="activeTab !== 'signup'"
+          class="py-3 text-center rounded-lg transition-colors"
+        >
+          Sign Up
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <div *ngIf="activeTab === 'login'" class="space-y-4">
+        <div class="space-y-2">
+          <label for="login-email" class="text-gray-300 block">Email</label>
+          <input
+            id="login-email"
+            type="email"
+            placeholder="Enter your email"
+            [(ngModel)]="loginEmail"
+            class="form-input"
+          />
+        </div>
+
+        <div class="space-y-2">
+          <label for="login-password" class="text-gray-300 block"
+            >Password</label
+          >
+          <div class="relative">
+            <input
+              id="login-password"
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Enter your password"
+              [(ngModel)]="loginPassword"
+              class="form-input form-input-with-icon"
+            />
+            <button
+              type="button"
+              (click)="toggleShowPassword()"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                *ngIf="!showPassword"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                ></path>
+              </svg>
+              <svg
+                *ngIf="showPassword"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button
+          (click)="handleLogin()"
+          class="w-full bg-white text-black hover:bg-gray-200 transition-all duration-200 backdrop-blur-sm shadow-lg py-3 rounded-md"
+        >
+          Login
+        </button>
+
+        <div class="text-center">
+          <button
+            class="text-gray-400 hover:text-white transition-colors text-sm"
+          >
+            Forgot your password?
+          </button>
+        </div>
+      </div>
+
+      <!-- Sign Up Form -->
+      <div *ngIf="activeTab === 'signup'" class="space-y-4">
+        <div class="space-y-2">
+          <label for="signup-name" class="text-gray-300 block">Full Name</label>
+          <input
+            id="signup-name"
+            type="text"
+            placeholder="Enter your full name"
+            [(ngModel)]="signupName"
+            class="form-input"
+          />
+        </div>
+
+        <div class="space-y-2">
+          <label for="signup-email" class="text-gray-300 block">Email</label>
+          <input
+            id="signup-email"
+            type="email"
+            placeholder="Enter your email"
+            [(ngModel)]="signupEmail"
+            class="form-input"
+          />
+        </div>
+
+        <div class="space-y-2">
+          <label for="signup-password" class="text-gray-300 block"
+            >Password</label
+          >
+          <div class="relative">
+            <input
+              id="signup-password"
+              [type]="showPassword ? 'text' : 'password'"
+              placeholder="Create a password"
+              [(ngModel)]="signupPassword"
+              class="form-input form-input-with-icon"
+            />
+            <button
+              type="button"
+              (click)="toggleShowPassword()"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                *ngIf="!showPassword"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                ></path>
+              </svg>
+              <svg
+                *ngIf="showPassword"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label for="signup-confirm-password" class="text-gray-300 block"
+            >Confirm Password</label
+          >
+          <div class="relative">
+            <input
+              id="signup-confirm-password"
+              [type]="showConfirmPassword ? 'text' : 'password'"
+              placeholder="Confirm your password"
+              [(ngModel)]="signupConfirmPassword"
+              class="form-input form-input-with-icon"
+            />
+            <button
+              type="button"
+              (click)="toggleShowConfirmPassword()"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                *ngIf="!showConfirmPassword"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                ></path>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                ></path>
+              </svg>
+              <svg
+                *ngIf="showConfirmPassword"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button
+          (click)="handleSignup()"
+          class="w-full bg-white text-black hover:bg-gray-200 transition-all duration-200 backdrop-blur-sm shadow-lg py-3 rounded-md"
+        >
+          Create Account
+        </button>
+
+        <div class="text-center">
+          <p class="text-gray-400 text-sm">
+            By signing up, you agree to our Terms of Service and Privacy Policy
+          </p>
+        </div>
+      </div>
+
+      <!-- Skip to Dashboard -->
+      <div class="mt-4 text-center">
+        <button
+          (click)="handleSkipToDashboard()"
+          class="text-gray-400 hover:text-white transition-colors text-sm underline"
+        >
+          Skip to Dashboard (Demo)
+        </button>
+      </div>
+
+      <!-- Social Login -->
+      <div class="mt-6 text-center">
+        <div class="relative">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-white/20"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-2 bg-transparent text-gray-400"
+              >or continue with</span
+            >
+          </div>
+        </div>
+
+        <div class="mt-4 flex gap-3">
+          <button
+            class="flex-1 bg-white/5 border border-white/20 text-gray-300 hover:bg-white/10 hover:text-white backdrop-blur-sm py-3 rounded-md transition-colors"
+          >
+            Google
+          </button>
+          <button
+            class="flex-1 bg-white/5 border border-white/20 text-gray-300 hover:bg-white/10 hover:text-white backdrop-blur-sm py-3 rounded-md transition-colors"
+          >
+            GitHub
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

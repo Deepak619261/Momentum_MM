@@ -1,0 +1,35 @@
+<div class="min-h-screen w-full flex flex-col p-4 relative overflow-hidden text-white">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800 z-0"></div>
+
+  <!-- Header -->
+  <div class="relative z-10 mb-6 p-4 border rounded-xl shadow" [ngClass]="getModeClasses()">
+    <h2 class="text-3xl font-bold">{{ getModeLabel() }}</h2>
+    <p class="text-sm text-white/70">Welcome to your personalized dashboard.</p>
+  </div>
+
+  <!-- Sections -->
+  <div class="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div
+      class="bg-white/10 p-4 rounded-xl hover:bg-white/20 cursor-pointer transition"
+      (click)="handleSectionClick('coding')"
+    >
+      <h3 class="text-xl font-semibold mb-2">Coding Section</h3>
+      <p class="text-sm text-white/70">Solve challenges and track your progress.</p>
+    </div>
+    <div
+      class="bg-white/10 p-4 rounded-xl hover:bg-white/20 cursor-pointer transition"
+      (click)="handleSectionClick('stats')"
+    >
+      <h3 class="text-xl font-semibold mb-2">Stats</h3>
+      <p class="text-sm text-white/70">View your activity and performance.</p>
+    </div>
+    <div
+      class="bg-white/10 p-4 rounded-xl hover:bg-white/20 cursor-pointer transition"
+      (click)="handleSectionClick('settings')"
+    >
+      <h3 class="text-xl font-semibold mb-2">Settings</h3>
+      <p class="text-sm text-white/70">Customize your experience.</p>
+    </div>
+  </div>
+</div>
