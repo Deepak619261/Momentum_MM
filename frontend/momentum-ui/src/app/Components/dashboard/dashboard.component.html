@@ -1,0 +1,898 @@
+<div class="min-h-screen w-full relative overflow-hidden">
+  <!-- Background with gradient -->
+  <div
+    class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"
+  ></div>
+
+  <!-- Background decorative elements -->
+  <div
+    class="absolute top-20 left-20 w-72 h-72 rounded-full bg-white/5 blur-3xl"
+  ></div>
+  <div
+    class="absolute bottom-20 right-20 w-96 h-96 rounded-full bg-gray-400/10 blur-3xl"
+  ></div>
+
+  <!-- Header -->
+  <header
+    class="relative z-10 border-b border-white/10 bg-black/20 backdrop-blur-sm"
+  >
+    <div class="max-w-7xl mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div
+            class="flex items-center gap-2 cursor-pointer"
+            (click)="navigateToHome()"
+          >
+            <div
+              class="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center"
+            >
+              <svg
+                class="w-5 h-5 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M13 10V3L4 14h7v7l9-11h-7z"
+                ></path>
+              </svg>
+            </div>
+            <span class="text-white text-xl">Momentum</span>
+          </div>
+          <div [ngClass]="getModeClasses()" class="px-2 py-1 rounded text-sm">
+            {{ getModeLabel() }}
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <button
+            class="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-md transition-colors flex items-center gap-2"
+          >
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 4v16m8-8H4"
+              ></path>
+            </svg>
+            New Tracker
+          </button>
+
+          <div
+            class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
+          >
+            <span class="text-white">DA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative z-10 max-w-7xl mx-auto px-6 py-12">
+    <!-- Stats Row -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <!-- Total Tracking Time -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6"
+      >
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <p class="text-gray-400 text-sm">Total Tracking Time</p>
+            <h3 class="text-3xl text-white mt-1">142h 35m</h3>
+          </div>
+          <div class="bg-blue-500/20 text-blue-300 rounded-lg p-2">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <p class="text-white/70 text-sm">+2h 15m this week</p>
+        <div class="w-full bg-white/10 h-1 mt-4 rounded-full overflow-hidden">
+          <div class="bg-blue-500 h-full rounded-full" style="width: 65%"></div>
+        </div>
+      </div>
+
+      <!-- Current Streak -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6"
+      >
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <p class="text-gray-400 text-sm">Current Streak</p>
+            <h3 class="text-3xl text-white mt-1">12 days</h3>
+          </div>
+          <div class="bg-orange-500/20 text-orange-300 rounded-lg p-2">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"
+              ></path>
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <p class="text-white/70 text-sm">Longest: 21 days</p>
+        <div class="flex gap-1 mt-4">
+          <div
+            class="flex-1 h-8 bg-white/10 rounded"
+            *ngFor="let day of [1, 2, 3, 4, 5, 6, 7]"
+            [ngClass]="{ 'bg-orange-500/40': day < 6 }"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Rank -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6"
+      >
+        <div class="flex items-start justify-between mb-4">
+          <div>
+            <p class="text-gray-400 text-sm">{{ getRankLabel() }}</p>
+            <h3 class="text-3xl text-white mt-1">{{ getRankValue() }}</h3>
+          </div>
+          <div [ngClass]="getModeClasses()" class="rounded-lg p-2">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M7 11l5-5m0 0l5 5m-5-5v12"
+              ></path>
+            </svg>
+          </div>
+        </div>
+        <p class="text-white/70 text-sm">{{ getRankSubtext() }}</p>
+      </div>
+    </div>
+
+    <!-- Main Sections -->
+    <h2 class="text-xl text-white mb-6">Fixed Tracking Categories</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+      <!-- Coding Section -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === 'coding'
+        }"
+        (click)="handleSectionClick('coding')"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-blue-500/20 text-blue-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">Coding/Skills</h3>
+            <p class="text-gray-400 text-sm">Track programming progress</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">2.5 hours</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-green-300">+15%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gym/Workout Section -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === 'gym'
+        }"
+        (click)="handleSectionClick('gym')"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-red-500/20 text-red-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 10h16M4 14h16M4 18h16"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">Gym/Workout</h3>
+            <p class="text-gray-400 text-sm">Track fitness & exercise</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">1.2 hours</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-red-300">-5%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Diet Section -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === 'diet'
+        }"
+        (click)="handleSectionClick('diet')"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-green-500/20 text-green-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">Diet</h3>
+            <p class="text-gray-400 text-sm">Track meals & nutrition</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">1,800 cal</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-green-300">On track</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Journaling Section -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === 'journaling'
+        }"
+        (click)="handleSectionClick('journaling')"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-yellow-500/20 text-yellow-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">Journaling</h3>
+            <p class="text-gray-400 text-sm">Track thoughts & emotions</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">1 entry</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-yellow-300">Updated</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Self-Talk Section -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === 'self-talk'
+        }"
+        (click)="handleSectionClick('self-talk')"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-purple-500/20 text-purple-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">Self-Talk</h3>
+            <p class="text-gray-400 text-sm">AI-powered mentorship</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">0 sessions</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-gray-300">Not started</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tracking Sheet Section -->
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === 'tracking-sheet'
+        }"
+        (click)="handleSectionClick('tracking-sheet')"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-gray-500/20 text-gray-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">Tracking Sheet</h3>
+            <p class="text-gray-400 text-sm">Overall progress summary</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">3/5 completed</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-blue-300">60%</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom Sections -->
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="text-xl text-white">Custom Categories</h2>
+      <button
+        class="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-md transition-colors flex items-center gap-2"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          ></path>
+        </svg>
+        Add Custom Category
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Custom Sections (conditionally rendered) -->
+      <div
+        *ngFor="let section of customSections"
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-6 hover:bg-white/15 transition-colors cursor-pointer"
+        [ngClass]="{
+          'bg-white/15 border-white/30': selectedSection === section
+        }"
+        (click)="handleSectionClick(section)"
+      >
+        <div class="flex items-center gap-4 mb-6">
+          <div class="bg-purple-500/20 text-purple-300 rounded-lg p-3">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+              ></path>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white text-lg">{{ section }}</h3>
+            <p class="text-gray-400 text-sm">Custom tracking</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-sm text-gray-400">Today</p>
+            <p class="text-white">Not tracked</p>
+          </div>
+          <div class="bg-white/10 rounded-lg px-2 py-1">
+            <p class="text-sm text-purple-300">Custom</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add New Section (shown only if there are fewer than 3 custom sections) -->
+      <div
+        *ngIf="customSections.length < 3"
+        class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-colors cursor-pointer border-dashed flex flex-col items-center justify-center text-center gap-3"
+        (click)="handleSectionClick('new')"
+      >
+        <div
+          class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center"
+        >
+          <svg
+            class="w-6 h-6 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+            ></path>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-white">Add Custom Category</h3>
+          <p class="text-gray-400 text-sm">Create personalized tracker</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Details (conditionally rendered based on selection) -->
+    <div class="mt-12" *ngIf="selectedSection && selectedSection !== 'new'">
+      <div class="border-b border-white/10 pb-4 mb-8">
+        <h2 class="text-2xl text-white">
+          {{
+            selectedSection === "tracking-sheet"
+              ? "Overall Progress"
+              : (selectedSection | titlecase) + " Details"
+          }}
+        </h2>
+      </div>
+
+      <!-- AI Insights Panel -->
+      <div
+        class="backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl p-6 mb-8"
+      >
+        <div class="flex items-center gap-2 mb-4">
+          <div
+            class="w-8 h-8 rounded-lg bg-blue-500/20 backdrop-blur-sm flex items-center justify-center"
+          >
+            <svg
+              class="w-4 h-4 text-blue-300"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-white text-lg">AI Insights</h3>
+        </div>
+
+        <ul class="space-y-3">
+          <li
+            *ngFor="let insight of getAIInsights(selectedSection)"
+            class="flex items-start gap-2"
+          >
+            <svg
+              class="w-5 h-5 text-blue-300 mt-0.5 shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <p class="text-gray-200">{{ insight }}</p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Gamification - Badges, Trophies & Milestones -->
+      <div class="mb-8" *ngIf="mode !== 'single'">
+        <h3 class="text-xl text-white mb-4">Gamification</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Badges -->
+          <div
+            class="backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl p-6"
+          >
+            <h4 class="text-white text-lg mb-4">Badges</h4>
+            <div class="space-y-3">
+              <div
+                *ngFor="let badge of getGamificationData().badges"
+                class="flex items-center gap-3"
+              >
+                <div
+                  [class]="
+                    badge.earned
+                      ? 'bg-blue-500/30 text-blue-300'
+                      : 'bg-gray-500/20 text-gray-400'
+                  "
+                  class="w-10 h-10 rounded-lg flex items-center justify-center"
+                >
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-white">{{ badge.name }}</p>
+                  <p class="text-gray-400 text-sm">{{ badge.description }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Milestones -->
+          <div
+            class="backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl p-6"
+          >
+            <h4 class="text-white text-lg mb-4">Milestones</h4>
+            <div class="space-y-4">
+              <div
+                *ngFor="let milestone of getGamificationData().milestones"
+                class="space-y-2"
+              >
+                <div class="flex justify-between">
+                  <p class="text-white">{{ milestone.name }}</p>
+                  <p class="text-gray-300">
+                    {{ milestone.current }}/{{ milestone.target }}
+                  </p>
+                </div>
+                <div
+                  class="w-full bg-white/10 h-2 rounded-full overflow-hidden"
+                >
+                  <div
+                    class="bg-green-500 h-full rounded-full"
+                    [style.width]="
+                      (milestone.current / milestone.target) * 100 + '%'
+                    "
+                  ></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group/Pair Features - Only shown in those modes -->
+      <div *ngIf="mode !== 'single'">
+        <!-- Leaderboard -->
+        <h3 class="text-xl text-white mb-4">Leaderboard</h3>
+        <div
+          class="backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl p-6 mb-8"
+        >
+          <div class="space-y-4">
+            <div
+              *ngFor="let user of getLeaderboardData()"
+              class="flex items-center justify-between p-3 rounded-lg"
+              [ngClass]="
+                user.isCurrentUser ? 'bg-white/10 border border-white/20' : ''
+              "
+            >
+              <div class="flex items-center gap-3">
+                <div
+                  class="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center overflow-hidden"
+                >
+                  <img [src]="user.avatar" class="w-full h-full object-cover" />
+                </div>
+                <p class="text-white">{{ user.name }}</p>
+              </div>
+              <div class="flex items-center gap-4">
+                <p class="text-gray-300">{{ user.points }} pts</p>
+                <div
+                  [ngClass]="getModeClasses()"
+                  class="px-2 py-1 rounded text-sm"
+                >
+                  #{{ user.rank }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Challenges -->
+        <h3 class="text-xl text-white mb-4">Active Challenges</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div
+            *ngFor="let challenge of getChallenges()"
+            class="backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl p-6"
+          >
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h4 class="text-white text-lg">{{ challenge.title }}</h4>
+                <p class="text-gray-400">{{ challenge.description }}</p>
+              </div>
+              <div
+                [ngClass]="
+                  getSectionColor(challenge.section) === 'blue'
+                    ? 'bg-blue-500/20 text-blue-300'
+                    : getSectionColor(challenge.section) === 'red'
+                    ? 'bg-red-500/20 text-red-300'
+                    : getSectionColor(challenge.section) === 'green'
+                    ? 'bg-green-500/20 text-green-300'
+                    : 'bg-purple-500/20 text-purple-300'
+                "
+                class="rounded-lg p-2"
+              >
+                <svg
+                  class="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex justify-between">
+                <p class="text-gray-300">Progress</p>
+                <p class="text-gray-300">
+                  {{ challenge.progress }}/{{ challenge.target }}
+                </p>
+              </div>
+              <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                <div
+                  [ngClass]="
+                    getSectionColor(challenge.section) === 'blue'
+                      ? 'bg-blue-500'
+                      : getSectionColor(challenge.section) === 'red'
+                      ? 'bg-red-500'
+                      : getSectionColor(challenge.section) === 'green'
+                      ? 'bg-green-500'
+                      : 'bg-purple-500'
+                  "
+                  class="h-full rounded-full"
+                  [style.width]="
+                    (challenge.progress / challenge.target) * 100 + '%'
+                  "
+                ></div>
+              </div>
+              <p class="text-gray-400 text-sm">
+                Deadline: {{ challenge.deadline | date }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Feed (Group Mode only) -->
+        <div *ngIf="mode === 'group'">
+          <h3 class="text-xl text-white mb-4">Social Feed</h3>
+          <div class="space-y-4 mb-8">
+            <div
+              *ngFor="let post of getSocialFeed()"
+              class="backdrop-blur-xl bg-white/5 border border-white/20 rounded-xl p-6"
+            >
+              <div class="flex items-center gap-3 mb-4">
+                <div
+                  class="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center overflow-hidden"
+                >
+                  <img
+                    [src]="post.user.avatar"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <p class="text-white">{{ post.user.name }}</p>
+                  <p class="text-gray-400 text-sm">
+                    {{ post.timestamp | date : "short" }}
+                  </p>
+                </div>
+              </div>
+
+              <p class="text-white mb-4">{{ post.content }}</p>
+
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                  <div
+                    class="flex items-center gap-1 text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"
+                      ></path>
+                    </svg>
+                    <span>{{ post.likes }}</span>
+                  </div>
+                  <div
+                    class="flex items-center gap-1 text-gray-400 hover:text-white transition-colors cursor-pointer"
+                  >
+                    <svg
+                      class="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"
+                      ></path>
+                    </svg>
+                    <span>{{ post.comments }}</span>
+                  </div>
+                </div>
+
+                <div
+                  [ngClass]="
+                    getSectionColor(post.section) === 'blue'
+                      ? 'bg-blue-500/20 text-blue-300'
+                      : getSectionColor(post.section) === 'red'
+                      ? 'bg-red-500/20 text-red-300'
+                      : getSectionColor(post.section) === 'green'
+                      ? 'bg-green-500/20 text-green-300'
+                      : 'bg-purple-500/20 text-purple-300'
+                  "
+                  class="px-2 py-1 rounded text-sm"
+                >
+                  {{ post.section | titlecase }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create New Custom Section Dialog -->
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      *ngIf="selectedSection === 'new'"
+    >
+      <div
+        class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl p-8 w-full max-w-md"
+      >
+        <h3 class="text-white text-xl mb-6">Create Custom Category</h3>
+
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <label class="text-gray-300 block">Category Name</label>
+            <input
+              #customSectionName
+              type="text"
+              placeholder="e.g., Reading, Meditation, etc."
+              class="w-full bg-white/10 border border-white/20 rounded-md p-2 text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-white/30"
+            />
+          </div>
+
+          <div class="flex items-center justify-end gap-4 pt-4">
+            <button
+              (click)="selectedSection = null"
+              class="px-4 py-2 text-gray-300 hover:text-white transition-colors"
+            >
+              Cancel
+            </button>
+            <button
+              (click)="
+                createCustomSection(customSectionName.value);
+                customSectionName.value = ''
+              "
+              class="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-md transition-colors"
+            >
+              Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

@@ -1,34 +1,149 @@
-<ng-container [ngSwitch]="currentView">
+<!-- Navigation Controls -->
+<div
+  class="fixed top-4 left-4 z-50 flex gap-2"
+  *ngIf="currentView !== 'landing'"
+>
+  <button
+    (click)="goBack()"
+    class="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm px-3 py-1 rounded-md transition-colors flex items-center gap-1"
+  >
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M15 19l-7-7 7-7"
+      ></path>
+    </svg>
+    Back
+  </button>
 
-  <app-landing-page
-    *ngSwitchCase="'landing'"
-    (getStarted)="handleGetStarted($event)"
-    (login)="handleLogin()"
-  />
+  <button
+    (click)="goForward()"
+    class="bg-white/10 border border-white/20 text-white hover:bg-white/20 backdrop-blur-sm px-3 py-1 rounded-md transition-colors flex items-center gap-1"
+  >
+    Forward
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9 5l7 7-7 7"
+      ></path>
+    </svg>
+  </button>
+</div>
 
-  <div *ngSwitchCase="'auth'" class="relative">
-    <app-auth-page />
+<!-- Main Content -->
+<div>
+  <!-- Use router outlet for showing components based on URL -->
+  <router-outlet></router-outlet>
 
-    <!-- Simulated skip to dashboard button -->
-    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-      <button 
-        (click)="handleAuthSuccess()"
-        class="pointer-events-auto mt-96 text-white/50 hover:text-white text-sm underline"
+  <!-- Conditional rendering based on currentView for backward compatibility -->
+  <ng-container [ngSwitch]="currentView" *ngIf="false">
+    <app-landing-page
+      *ngSwitchCase="'landing'"
+      (getStarted)="handleGetStarted($event)"
+      (login)="handleLogin()"
+    />
+
+    <div *ngSwitchCase="'auth'" class="relative">
+      <app-auth-page
+        (skipToDashboard)="handleSkipToDashboard()"
+        (closeModal)="navigateTo('landing')"
+      />
+    </div>
+
+    <app-mode-selection
+      *ngSwitchCase="'mode-selection'"
+      (modeSelect)="handleModeSelect($event)"
+    />
+
+    <app-dashboard
+      *ngSwitchCase="'dashboard'"
+      [mode]="selectedMode"
+      (sectionClick)="handleSectionClick($event)"
+    />
+
+    <app-about *ngSwitchCase="'about'" />
+  </ng-container>
+</div>
+
+<!-- Footer -->
+<footer
+  class="w-full py-6 px-6 bg-black/30 backdrop-blur-md border-t border-white/10 text-white/70 z-50"
+  *ngIf="currentView !== 'landing'"
+>
+  <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- Left Column -->
+    <div>
+      <div
+        class="flex items-center gap-2 mb-4 cursor-pointer"
+        [routerLink]="['']"
       >
-        Skip to Dashboard (Demo)
-      </button>
+        <div
+          class="w-8 h-8 rounded-lg bg-white/20 backdrop-blur-sm flex items-center justify-center"
+        >
+          <svg
+            class="w-5 h-5 text-white"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            ></path>
+          </svg>
+        </div>
+        <span class="text-white text-xl">Momentum</span>
+      </div>
+      <p class="text-sm">
+        Track your progress, maintain your momentum, achieve your goals.
+      </p>
+    </div>
+
+    <!-- Middle Column -->
+    <div>
+      <h3 class="text-white font-medium mb-4">Quick Links</h3>
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a [routerLink]="['']" class="hover:text-white transition-colors"
+            >Home</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/dashboard']"
+            class="hover:text-white transition-colors"
+            >Dashboard</a
+          >
+        </li>
+        <li>
+          <a
+            [routerLink]="['/mode-selection']"
+            class="hover:text-white transition-colors"
+            >Change Mode</a
+          >
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right Column -->
+    <div>
+      <h3 class="text-white font-medium mb-4">Contact</h3>
+      <ul class="space-y-2 text-sm">
+        <li>support&#64;momentum.io</li>
+        <li>+1 (555) 123-4567</li>
+        <li>1234 Coding Lane, Dev City, CA 94043</li>
+      </ul>
     </div>
   </div>
 
-  <!-- <app-mode-selection
-    *ngSwitchCase="'mode-selection'"
-    (modeSelect)="handleModeSelect($event)"
-  /> -->
-
-  <!-- <app-dashboard
-    *ngSwitchCase="'dashboard'"
-    [mode]="selectedMode"
-    (sectionClick)="handleSectionClick($event)"
-  /> -->
-
-</ng-container>
+  <!-- Copyright -->
+  <div class="mt-8 pt-4 border-t border-white/10 text-center text-sm">
+    <p>© 2025 Momentum. All rights reserved.</p>
+  </div>
+</footer>

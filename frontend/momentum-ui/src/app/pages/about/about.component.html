@@ -1,0 +1,306 @@
+<!-- Navbar -->
+<nav
+  class="w-full bg-gray-900 bg-opacity-80 backdrop-blur-lg fixed top-0 z-50 border-b border-gray-800"
+>
+  <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+    <!-- Logo/Name -->
+    <div
+      class="flex items-center space-x-2 cursor-pointer"
+      (click)="navigateToHome()"
+    >
+      <div
+        class="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-md flex items-center justify-center"
+      >
+        <span class="text-white font-bold text-lg">M</span>
+      </div>
+      <span class="text-white text-lg font-semibold">TrackrCollab</span>
+    </div>
+
+    <!-- Navigation -->
+    <div class="flex items-center space-x-6">
+      <a
+        [routerLink]="['/']"
+        class="text-gray-300 hover:text-white transition-colors"
+        >Home</a
+      >
+      <a [routerLink]="['/about']" class="text-white font-medium">About</a>
+      <a
+        [routerLink]="['/auth']"
+        class="text-gray-300 hover:text-white transition-colors"
+        >Sign In</a
+      >
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section
+  class="hero-section gradient-bg min-h-screen pt-20 flex flex-col items-center justify-center relative px-4"
+>
+  <!-- Animated background elements -->
+  <div class="animated-gradient bg-blue-500 w-96 h-96 top-20 left-20"></div>
+  <div
+    class="animated-gradient bg-purple-500 w-[500px] h-[500px] bottom-20 right-20"
+  ></div>
+  <div
+    class="animated-gradient bg-pink-500 w-[300px] h-[300px] top-40 right-60"
+  ></div>
+
+  <div class="container mx-auto py-20 z-10 relative">
+    <!-- Project Title -->
+    <h1
+      class="text-4xl md:text-6xl font-bold text-center mb-6 text-white leading-tight"
+    >
+      About
+      <span
+        class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500"
+        >TrackrCollab</span
+      >
+    </h1>
+
+    <!-- Project Tagline -->
+    <p class="text-xl text-gray-300 text-center max-w-4xl mx-auto mb-12">
+      A full-stack personal productivity and collaboration platform that helps
+      users track and improve their daily habits and goals in Solo, Pair, or
+      Group modes.
+    </p>
+
+    <!-- Project Description -->
+    <div
+      class="bg-gray-800/50 backdrop-blur-md border border-gray-700 rounded-xl p-8 mb-16 max-w-5xl mx-auto"
+    >
+      <p class="text-gray-300 mb-6 leading-relaxed">
+        Designed with a modern tech stack—C# .NET (Web API), Entity Framework
+        Core, PostgreSQL, Angular, and Tailwind CSS—this project offers a robust
+        and scalable solution for tracking progress across areas like
+        Coding/Skills, Gym/Workout, Diet, and Journaling.
+      </p>
+      <p class="text-gray-300 leading-relaxed">
+        In short, TrackrCollab is not just a productivity tool — it's a showcase
+        of full-stack engineering, real-time systems, AI integration, and
+        user-centered design.
+      </p>
+    </div>
+
+    <!-- Feature Cards -->
+    <h2 class="text-2xl md:text-3xl font-semibold text-white text-center mb-12">
+      Key Features
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+      <!-- Feature Card 1 -->
+      <div
+        class="feature-card bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-6"
+      >
+        <div class="text-blue-400 text-4xl mb-4">✅</div>
+        <h3 class="text-xl font-medium text-white mb-3">Activity Tracking</h3>
+        <p class="text-gray-400">
+          To-do lists, custom trackers, and multicolor heatmaps per activity to
+          visualize your progress over time.
+        </p>
+      </div>
+
+      <!-- Feature Card 2 -->
+      <div
+        class="feature-card bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-6"
+      >
+        <div class="text-blue-400 text-4xl mb-4">📈</div>
+        <h3 class="text-xl font-medium text-white mb-3">Progress Insights</h3>
+        <p class="text-gray-400">
+          Detailed graphs and analytics to track your improvement and identify
+          patterns in your habits.
+        </p>
+      </div>
+
+      <!-- Feature Card 3 -->
+      <div
+        class="feature-card bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-6"
+      >
+        <div class="text-blue-400 text-4xl mb-4">🤖</div>
+        <h3 class="text-xl font-medium text-white mb-3">AI Feedback</h3>
+        <p class="text-gray-400">
+          OpenAI-powered analysis and mentoring to provide personalized
+          suggestions and motivation.
+        </p>
+      </div>
+
+      <!-- Feature Card 4 -->
+      <div
+        class="feature-card bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-6"
+      >
+        <div class="text-blue-400 text-4xl mb-4">🗣️</div>
+        <h3 class="text-xl font-medium text-white mb-3">Self-Talk Journal</h3>
+        <p class="text-gray-400">
+          Journal your thoughts and receive AI suggestions to improve your
+          mental approach.
+        </p>
+      </div>
+
+      <!-- Feature Card 5 -->
+      <div
+        class="feature-card bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-6"
+      >
+        <div class="text-blue-400 text-4xl mb-4">💬</div>
+        <h3 class="text-xl font-medium text-white mb-3">
+          Real-time Collaboration
+        </h3>
+        <p class="text-gray-400">
+          Chat and collaborate with partners or groups in real-time via SignalR
+          integration.
+        </p>
+      </div>
+
+      <!-- Feature Card 6 -->
+      <div
+        class="feature-card bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-6"
+      >
+        <div class="text-blue-400 text-4xl mb-4">🏆</div>
+        <h3 class="text-xl font-medium text-white mb-3">Gamification</h3>
+        <p class="text-gray-400">
+          Points, leaderboards, challenges, and badges to keep you motivated and
+          engaged.
+        </p>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="mb-16">
+      <h2
+        class="text-2xl md:text-3xl font-semibold text-white text-center mb-8"
+      >
+        Technology Stack
+      </h2>
+
+      <div
+        class="bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-8 max-w-4xl mx-auto"
+      >
+        <div class="mb-8">
+          <h3 class="text-xl text-white mb-4">Backend</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >C# .NET</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >ASP.NET Core Web API</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >Entity Framework Core</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >PostgreSQL</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >SignalR</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >OpenAI API</span
+            >
+          </div>
+        </div>
+
+        <div class="mb-8">
+          <h3 class="text-xl text-white mb-4">Frontend</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >Angular</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >TypeScript</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >Tailwind CSS</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >RxJS</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >PWA</span
+            >
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xl text-white mb-4">DevOps & Infrastructure</h3>
+          <div class="flex flex-wrap gap-3">
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >Docker</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >GitHub Actions</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >Azure</span
+            >
+            <span class="tech-chip px-3 py-1 rounded-full text-sm text-gray-300"
+              >CI/CD</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Features -->
+    <div
+      class="bg-gray-800/30 backdrop-blur-md border border-gray-700 rounded-xl p-8 mb-16 max-w-5xl mx-auto"
+    >
+      <h2 class="text-2xl font-semibold text-white text-center mb-6">
+        Additional Features
+      </h2>
+
+      <ul class="text-gray-300 space-y-3 max-w-3xl mx-auto">
+        <li class="flex items-start">
+          <span class="text-blue-400 mr-3">•</span>
+          <span
+            >PWA version for offline usage with data synchronization when back
+            online</span
+          >
+        </li>
+        <li class="flex items-start">
+          <span class="text-blue-400 mr-3">•</span>
+          <span
+            >Third-party API integrations with platforms like LeetCode,
+            Nutritionix, and Google Fit</span
+          >
+        </li>
+        <li class="flex items-start">
+          <span class="text-blue-400 mr-3">•</span>
+          <span
+            >Comprehensive Tracking Sheet for performance summaries across all
+            activity areas</span
+          >
+        </li>
+        <li class="flex items-start">
+          <span class="text-blue-400 mr-3">•</span>
+          <span
+            >Strong front-end architecture using Angular's standalone components
+            and reactive forms</span
+          >
+        </li>
+        <li class="flex items-start">
+          <span class="text-blue-400 mr-3">•</span>
+          <span
+            >Optimized back-end logic with EF Core and PostgreSQL indexing for
+            performance</span
+          >
+        </li>
+        <li class="flex items-start">
+          <span class="text-blue-400 mr-3">•</span>
+          <span
+            >Modern DevOps practices with automated testing, containerization,
+            and cloud deployment</span
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 border-t border-gray-800 py-8">
+  <div class="container mx-auto px-4">
+    <div class="text-center">
+      <p class="text-gray-400">© 2025 TrackrCollab. All rights reserved.</p>
+      <p class="text-gray-500 text-sm mt-2">Created by Momentum Team</p>
+    </div>
+  </div>
+</footer>
