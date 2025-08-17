@@ -138,11 +138,18 @@
           </div>
         </div>
 
+        <!-- Error message for login -->
+        <div *ngIf="loginError" class="text-red-500 text-sm mt-2 mb-2">
+          {{ loginError }}
+        </div>
+
         <button
           (click)="handleLogin()"
-          class="w-full bg-white text-black hover:bg-gray-200 transition-all duration-200 backdrop-blur-sm shadow-lg py-3 rounded-md"
+          [disabled]="isLoading"
+          class="w-full bg-white text-black hover:bg-gray-200 transition-all duration-200 backdrop-blur-sm shadow-lg py-3 rounded-md disabled:opacity-50"
         >
-          Login
+          <span *ngIf="!isLoading">Login</span>
+          <span *ngIf="isLoading">Logging in...</span>
         </button>
 
         <div class="text-center">
@@ -288,11 +295,18 @@
           </div>
         </div>
 
+        <!-- Error message for signup -->
+        <div *ngIf="signupError" class="text-red-500 text-sm mt-2 mb-2">
+          {{ signupError }}
+        </div>
+
         <button
           (click)="handleSignup()"
-          class="w-full bg-white text-black hover:bg-gray-200 transition-all duration-200 backdrop-blur-sm shadow-lg py-3 rounded-md"
+          [disabled]="isLoading"
+          class="w-full bg-white text-black hover:bg-gray-200 transition-all duration-200 backdrop-blur-sm shadow-lg py-3 rounded-md disabled:opacity-50"
         >
-          Create Account
+          <span *ngIf="!isLoading">Create Account</span>
+          <span *ngIf="isLoading">Creating Account...</span>
         </button>
 
         <div class="text-center">

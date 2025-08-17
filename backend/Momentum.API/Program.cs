@@ -62,7 +62,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalhost4200", policy =>
     {
-        policy.WithOrigins("http://localhost:4200") // Angular dev server
+        policy.WithOrigins(
+                "http://localhost:4200",   // HTTP Angular dev server
+                "https://localhost:4200"   // HTTPS Angular dev server
+             )
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials(); // if you're using cookies or auth headers
@@ -73,7 +76,25 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
+// Configure HTTPS requirement
+builder.Services.AddHsts(options =>
+{
+    options.Preload = true;
+    options.IncludeSubDomains = true;
+    options.MaxAge = TimeSpan.FromDays(60);
+});
+
+// Force HTTPS in all environments
+builder.Services.AddHttpsRedirection(options =>
+{
+    options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+    options.HttpsPort = 7262;
+});
+
 var app = builder.Build();
+
+// Apply HTTPS redirection early in the pipeline
+app.UseHttpsRedirection();
 app.UseCors("AllowLocalhost4200");
 
 // Middleware
@@ -85,7 +106,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication(); 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
