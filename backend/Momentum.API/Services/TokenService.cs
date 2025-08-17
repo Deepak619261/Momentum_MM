@@ -26,11 +26,18 @@ namespace Momentum.API.Services
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+            // Get configurable expiration or default to 1 hour
+            var expiryInHours = 1;
+            if (int.TryParse(_config["Jwt:ExpiryInHours"], out int configuredHours))
+            {
+                expiryInHours = configuredHours;
+            }
+
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddHours(1),
+                expires: DateTime.UtcNow.AddHours(expiryInHours),
                 signingCredentials: creds
             );
 

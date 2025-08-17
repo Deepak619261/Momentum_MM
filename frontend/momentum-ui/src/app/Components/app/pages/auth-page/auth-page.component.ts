@@ -37,4 +37,9 @@ export class AuthPageComponent {
   toggleConfirmPasswordVisibility() {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
+  
+  handleLogin() {
+    // Handle login logic here
+    console.log('Logging in with:', this.loginEmail, this.loginPassword);
+  }
 }
