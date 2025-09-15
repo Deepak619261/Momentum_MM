@@ -28,6 +28,11 @@ interface AuthResponse {
   user?: User;
 }
 
+interface GoogleAuthResponse {
+  token: string;
+  user: User;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -98,5 +103,25 @@ export class AuthService {
       }
     }
     return null;
+  }
+
+  // Google OAuth methods
+  initiateGoogleLogin(): void {
+    // Redirect to backend Google OAuth endpoint
+    window.location.href = `${this.apiUrl}/google-login`;
+  }
+
+  handleGoogleCallback(code: string, state?: string): Observable<GoogleAuthResponse> {
+    const params = new URLSearchParams({ code });
+    if (state) params.append('state', state);
+    
+    return this.http
+      .get<GoogleAuthResponse>(`${this.apiUrl}/google-callback?${params.toString()}`)
+      .pipe(
+        tap((response) => {
+          this.storageService.setItem('authToken', response.token);
+          this.storageService.setItem('user', JSON.stringify(response.user));
+        })
+      );
   }
 }

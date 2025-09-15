@@ -5,12 +5,14 @@ import { CodingSectionComponent } from './pages/coding-section/coding-section.co
 import { AboutComponent } from './pages/about/about.component';
 // Use the one dashboard component from Components directory
 import { AuthPageComponent } from './Components/auth/auth-page.component';
+import { GoogleCallbackComponent } from './Components/auth/google-callback.component';
 import { DashboardComponent } from './Components/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
   { path: 'about', component: AboutComponent },
   { path: 'auth', component: AuthPageComponent },
+  { path: 'auth/google/callback', component: GoogleCallbackComponent },
   { path: 'mode-selection', component: ModeSelectionComponent },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'coding', component: CodingSectionComponent },
